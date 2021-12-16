@@ -29,11 +29,9 @@ jobs:
           pip install $(ls .\wheelhouse\)
           pytest test_saxonc.py
       - name: upload wheel
-        env:
-          TWINE_USER: ${{ secrets.TWINE_TU }}
-          TWINE_PASS: ${{ secrets.TWINE_TP }}
+        # env:
+        #   TWINE_USER: ${{ secrets.TWINE_TU }}
+        #   TWINE_PASS: ${{ secrets.TWINE_TP }}
         run: |
           pip install twine
-          echo "----------------------------------->"
-          echo $TWINE_USER
-          twine upload --skip-existing --verbose --repository testpypi --username $TWINE_USER --password $TWINE_PASS wheelhouse\*
+          twine upload --skip-existing --verbose --repository testpypi --username "${{ secrets.TWINE_TU }}" --password "${{ secrets.TWINE_TP }}" wheelhouse\*
