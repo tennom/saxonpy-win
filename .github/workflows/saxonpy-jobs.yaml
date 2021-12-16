@@ -20,13 +20,13 @@ jobs:
       - name: delvewheel wheel for multiple macOS support.
         run: |
           pip install delvewheel
-          delvewheel repair -v dist\$(ls .\dist\)
+          delvewheel repair -v $(ls .\dist\)
           echo "listing the fixed wheels....."
           ls wheelhouse
       - name: install pytest, saxonpy, and test
         run: |
           pip install pytest
-          pip install wheelhouse\$(ls .\wheelhouse\)
+          pip install $(ls .\wheelhouse\)
           pytest test_saxonc.py
       # - name: upload wheel
       #   env:
