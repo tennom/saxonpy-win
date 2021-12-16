@@ -31,4 +31,4 @@ jobs:
       - name: upload wheel
         run: |
           pip install twine
-          twine upload --skip-existing --verbose --repository testpypi --username "${{ secrets.TWINE_U }}" --password "${{ secrets.TWINE_P }}" wheelhouse\*
+          twine upload --skip-existing --verbose --username "${{ secrets.TWINE_U }}" --password "${{ secrets.TWINE_P }}" wheelhouse\*
