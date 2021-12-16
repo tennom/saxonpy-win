@@ -6,7 +6,7 @@ jobs:
     strategy:
       matrix:
         os: [windows-2019]
-        python-version: [ '3.6', '3.7', '3.8', '3.9', '3.10' ]
+        python-version: [ '3.6' ]
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python
@@ -30,8 +30,10 @@ jobs:
           pytest test_saxonc.py
       - name: upload wheel
         env:
-          TWINE_USER: ${{ secrets.TWINE_TU }}
-          TWINE_PASS: ${{ secrets.TWINE_TP }}
+          TWINE_USERNAME: ${{ secrets.TWINE_TU }}
+          TWINE_PASSWORD: ${{ secrets.TWINE_TP }}
         run: |
           pip install twine
-          twine upload --skip-existing --verbose -u "$TWINE_USER" -p "$TWINE_PASS" --repository testpypi $(ls .\wheelhouse\)
+          echo "----------------------------------->"
+          echo $TWINE_USERNAME
+          twine upload --skip-existing --verbose --repository testpypi $(ls .\wheelhouse\)
