@@ -6,7 +6,7 @@ jobs:
     strategy:
       matrix:
         os: [windows-2019]
-        python-version: [ '3.6' ]
+        python-version: [ '3.6', '3.7', '3.8', '3.9', '3.10' ]
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python
@@ -29,9 +29,6 @@ jobs:
           pip install $(ls .\wheelhouse\)
           pytest test_saxonc.py
       - name: upload wheel
-        # env:
-        #   TWINE_USER: ${{ secrets.TWINE_TU }}
-        #   TWINE_PASS: ${{ secrets.TWINE_TP }}
         run: |
           pip install twine
           twine upload --skip-existing --verbose --repository testpypi --username "${{ secrets.TWINE_TU }}" --password "${{ secrets.TWINE_TP }}" wheelhouse\*
